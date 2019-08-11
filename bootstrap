@@ -16,7 +16,7 @@ function link_files {
   FILES_TO_LINK=$(find $1 -regex '.*\.link$')
   for FILE in ${FILES_TO_LINK}
   do
-    DEST="${HOME}/$(basename ${FILE} .link)"
+    DEST="${HOME}/.$(basename ${FILE} .link)"
     echo "Linking ${FILE} to ${DEST}"
     sym_link ${FILE} ${DEST} 
   done

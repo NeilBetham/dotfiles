@@ -1,0 +1,35 @@
+"Basic Settings
+filetype plugin indent on
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set number
+
+"Plugins
+call plug#begin('~/.vim/plugins/')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+
+Plug 'valloric/youcompleteme', {'do': 'python3 ./install.py --clang-completer'}
+
+Plug 'easymotion/vim-easymotion'
+
+call plug#end()
+
+"Maps
+map ; :Files<CR>
+
+"lightline config
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+set noshowmode
