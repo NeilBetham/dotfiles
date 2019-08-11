@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+if [ -x "$(command -v antibody)" ]; then
+  exit 0
+fi
+
+if [ ! -d "${HOME}/bin" ]; then
+  mkdir "${HOME}/bin"
+fi
+
+${CWD}/install-antibody.sh -b "${HOME}/bin"
+

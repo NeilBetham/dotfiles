@@ -1,0 +1,15 @@
+# Get zshrc file dir
+DIR="$(~/.dotpath)"
+
+# Add home bin to $PATH
+PATH="${HOME}/bin:${PATH}"
+
+# Add dotfile bin to $PATH
+PATH="${DIR}/bin/:${PATH}"
+
+# Antibody Setup
+if [ "${DIR}/zsh_plugins.txt" -nt "~/.zsh_plugins.sh" ] || [ ! -f "~/.zsh_plugins.sh" ]; then
+  antibody bundle < ${DIR}/zsh/zsh_plugins.txt > ~/.zsh_plugins.sh
+fi
+source ~/.zsh_plugins.sh
+
