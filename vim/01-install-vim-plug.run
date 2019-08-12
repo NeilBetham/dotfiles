@@ -12,4 +12,5 @@ echo "Installing vim-plug"
 mkdir -p "${HOME}/.vim/autoload"
 cp "${CWD}/plug.vim" "${HOME}/.vim/autoload/plug.vim"
 
-vim +PlugInstall +q +q
+
+(vim +PlugUpdate +q +q </dev/null &>/dev/null)

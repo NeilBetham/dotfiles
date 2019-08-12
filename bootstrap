@@ -45,5 +45,5 @@ function bootstrap_modules {
   done
 }
 
-bootstrap_modules "$CWD"
 link_modules "$CWD"
+bootstrap_modules "$CWD"
