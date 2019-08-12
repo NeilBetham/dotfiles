@@ -1,13 +1,13 @@
 # Change prefix to ctrl-a
-unbind C-b
+unbind-key C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix
 
 # Better pane nav
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
+bind-key -n M-Left select-pane -L
+bind-key -n M-Right select-pane -R
+bind-key -n M-Up select-pane -U
+bind-key -n M-Down select-pane -D
 
 # Enable mouse control
 # set -g mouse-select-window on
