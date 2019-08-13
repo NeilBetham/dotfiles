@@ -5,6 +5,22 @@ set shiftwidth=2
 set expandtab
 set number
 
+"Maps
+nnorema ; :Files<CR>
+
+"lightline config
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+set noshowmode
+
+"Vim / Tmux Nav
+let g:tmux_navigator_save_on_switch = 2
+
+"Reduce ESC delays
+set timeoutlen=10 ttimeoutlen=0 
+
 "Plugins
 call plug#begin('~/.vim/plugins/')
 
@@ -15,21 +31,11 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-
-Plug 'valloric/youcompleteme', {'do': 'python3 ./install.py --clang-completer'}
 
 Plug 'easymotion/vim-easymotion'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
-"Maps
-map ; :Files<CR>
 
-"lightline config
-set laststatus=2
-if !has('gui_running')
-  set t_Co=256
-endif
-set noshowmode
