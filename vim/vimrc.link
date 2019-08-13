@@ -38,4 +38,9 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
+"Remove Extra Whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
+"High light extra whitespace
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
