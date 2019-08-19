@@ -1,3 +1,9 @@
+"Hard Mode
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 "Basic Settings
 filetype plugin indent on
 set tabstop=2
@@ -19,7 +25,7 @@ set noshowmode
 let g:tmux_navigator_save_on_switch = 2
 
 "Reduce ESC delays
-set timeoutlen=10 ttimeoutlen=0 
+set timeoutlen=10 ttimeoutlen=0
 
 "Plugins
 call plug#begin('~/.vim/plugins/')
@@ -30,6 +36,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
 
 Plug 'terryma/vim-multiple-cursors'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+
+Plug 'valloric/youcompleteme', {'do': 'python3 ./install.py --clang-completer'}
 
 
 Plug 'easymotion/vim-easymotion'
@@ -44,3 +55,4 @@ autocmd BufWritePre * :%s/\s\+$//e
 "High light extra whitespace
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
+

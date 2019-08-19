@@ -12,13 +12,13 @@ function get_modules {
   find $1 ! -path ${CWD} -type d | egrep -v "${MODULE_REGEX}"
 }
 
-function link_files { 
+function link_files {
   FILES_TO_LINK=$(find $1 -regex '.*\.link$')
   for FILE in ${FILES_TO_LINK}
   do
     DEST="${HOME}/.$(basename ${FILE} .link)"
     echo "Linking ${FILE} to ${DEST}"
-    sym_link ${FILE} ${DEST} 
+    sym_link ${FILE} ${DEST}
   done
 }
 
@@ -30,7 +30,7 @@ function link_modules {
 }
 
 function bootstrap_module {
-  BOOTSTRAPS=$(find $1 -regex '.*\.run$')
+  BOOTSTRAPS=$(find $1 -regex '.*\.run$' | sort -V)
   for BOOTSTRAP in ${BOOTSTRAPS}
   do
     echo "Running bootstrap $BOOTSTRAP"
