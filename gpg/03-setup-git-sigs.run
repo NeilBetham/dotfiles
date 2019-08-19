@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+if [ -f "${HOME}/.ssh/id_rsa_yubikey.pub" ]; then
+exit 0
+fi
+
+ssh-add -L | grep "cardno:" > "${HOME}/.ssh/id_rsa_yubikey.pub"
+
+cat << EOF >> "${HOME}/.ssh/config"
+Host github.com
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/id_rsa_yubikey.pub
+EOF
+
+git config --global user.signingkey 21BEBB6745B74E7F
+git config --global commit.gpgsign true

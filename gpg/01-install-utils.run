@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ -f "/usr/lib/gnupg/scdaemon" ] || [ -f "/usr/lib/gnupg2/scdaemon" ]; then
+ exit 0
+fi
+
+sudo apt install scdaemon

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ ! -d "${HOME}/.gnupg" ]; then
+  mkdir "${HOME}/.gnupg"
+  chmod 700 "${HOME}/.gnupg"
+fi
+
+if [ ! -f "${HOME}/.gnupg" ]; then
+
+cat <<EOF > "${HOME}/.gnupg/gpg-agent.conf"
+enable-ssh-support
+default-cache-ttl 60
+max-cache-ttl 120
+EOF
+
+fi
