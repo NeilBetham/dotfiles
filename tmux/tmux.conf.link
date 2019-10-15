@@ -9,6 +9,8 @@ set -g mouse on
 # Bindings
 bind-key r source-file ~/.tmux.conf \; display-message "~/.tmux.conf reloaded"
 
+# Set a reasonable scrollback buffer
+set-option -g history-limit 10000
 
 # Theme
 # loud or quiet?
