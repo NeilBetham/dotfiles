@@ -32,10 +32,10 @@ set -g pane-active-border-style 'bg=colour236 fg=colour105'
 set -g status-position bottom
 set -g status-justify left
 set -g status-style 'bg=colour238 fg=colour137 dim'
-set -g status-left ''
+set -g status-left '#[fg=colour233,bg=colour242] #(sonos-current-info) '
 set -g status-right '#[fg=colour233,bg=colour242] %d/%m #[fg=colour233,bg=colour248] %H:%M:%S '
-set -g status-right-length 50
-set -g status-left-length 20
+set -g status-right-length 150
+set -g status-left-length 150
 
 setw -g window-status-current-style 'fg=colour37 bg=colour248 bold'
 setw -g window-status-current-format ' #I#[fg=colour244]:#[fg=colour233]#W#[fg=colour244]#F '
@@ -65,3 +65,16 @@ bind-key -T copy-mode-vi C-j select-pane -D
 bind-key -T copy-mode-vi C-k select-pane -U
 bind-key -T copy-mode-vi C-l select-pane -R
 bind-key -T copy-mode-vi C-\ select-pane -l
+
+# Setup copy to clipboard
+setw -g mode-keys vi
+bind-key -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi y send -X copy-pipe "xclip -in -selection clipboard"\; send -X copy-selection-and-cancel\; display-message "Copied!"
+
+# Update default binding of `Enter` to also use copy-pipe	# Update default binding of `Enter` to also use copy-pipe
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send -X copy-pipe "xclip -in -selection clipboard"\; send -X copy-selection-and-cancel\; display-message "Copied!"
+
+
+## Status bar design	# Mouse copy
+bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe "xclip -in -selection clipboard"\; send -X copy-selection-and-cancel\; display-message "Copied!"
