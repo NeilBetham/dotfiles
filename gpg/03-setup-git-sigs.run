@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 if [ -f "${HOME}/.ssh/id_rsa_yubikey.pub" ]; then
-exit 0
+  exit 0
 fi
 
+# Pull the signing info from Yubikey
+while $(gpg --card-status 2>&1 | grep -q 'No such device'); do
+  echo "Waiting for YubiKey"
+  sleep 1
+done
+
 ssh-add -L | grep "cardno:" > "${HOME}/.ssh/id_rsa_yubikey.pub"
+gpg --fetch-keys $(gpg --card-status | grep 'URL of public key' | awk '{split($0, a, " : "); print a[2]}')
 
 cat << EOF >> "${HOME}/.ssh/config"
 Host github.com

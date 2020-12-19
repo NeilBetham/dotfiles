@@ -5,6 +5,7 @@ if [ ! -d "${HOME}/.gnupg" ]; then
   chmod 700 "${HOME}/.gnupg"
 fi
 
+
 if [ ! -f "${HOME}/.gnupg" ]; then
 
 cat <<EOF > "${HOME}/.gnupg/gpg-agent.conf"
@@ -14,3 +15,9 @@ max-cache-ttl 120
 EOF
 
 fi
+
+# Start gpgp agent
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+gpg-connect-agent updatestartuptty /bye > /dev/null
+
