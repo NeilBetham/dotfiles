@@ -24,3 +24,6 @@ gpg-connect-agent updatestartuptty /bye > /dev/null
 
 # Machine specific rc
 test -f ~/.zshrc_mach && source ~/.zshrc_mach
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

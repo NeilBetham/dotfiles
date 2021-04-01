@@ -22,5 +22,5 @@ Host gitlab.com
 
 EOF
 
-git config --global user.signingkey 21BEBB6745B74E7F
+git config --global user.signingkey B50174CF602A74EA
 git config --global commit.gpgsign true
