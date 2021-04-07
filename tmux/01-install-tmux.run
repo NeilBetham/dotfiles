@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if ! command -v tmux &> /dev/null; then
+  echo "No tmux present, installing..."
+
+  if [[ -n ${LINUX} ]]; then
+    sudo apt install -y tmux
+  elif [[ -n ${MACOS} ]]; then
+    brew install tmux
+  fi
+fi

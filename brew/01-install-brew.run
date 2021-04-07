@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ -n ${MACOS} ]]; then
+  if [ ! -f "/usr/local/bin/brew" ]; then
+    echo "Installing Homebrew"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+fi

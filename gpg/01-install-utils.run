@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
-if [ -f "/usr/lib/gnupg/scdaemon" ] || [ -f "/usr/lib/gnupg2/scdaemon" ]; then
- exit 0
-fi
+if [[ -n ${LINUX} ]]; then
+  if [ -f "/usr/lib/gnupg/scdaemon" ] || [ -f "/usr/lib/gnupg2/scdaemon" ]; then
+   exit 0
+  fi
 
-sudo apt install scdaemon
+  echo "Missing scdaemon, installing now..."
+  sudo apt install -y scdaemon
+elif [[ -n ${MACOS} ]]; then
+  if [ -f "/usr/local/bin/gpg" ]; then
+    exit 0
+  fi
+
+  echo "Missing gpg tools, installing now..."
+  brew install gnupg yubikey-personalization hopenpgp-tools ykman pinentry-mac
+fi

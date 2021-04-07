@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if ! command -v vim &> /dev/null; then
+  if [[ -n ${LINUX} ]]; then
+    sudo apt install -y vim
+  fi
+fi
+
+if [[ -n ${MACOS} ]]; then
+  brew install vim
+fi

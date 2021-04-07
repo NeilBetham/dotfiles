@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ -n $NO_COMMIT_SIGNING_SETUP ]]; then
+  echo "Skipping GPG git commit signing setup"
+else
+  git config --global user.signingkey B50174CF602A74EA
+  git config --global commit.gpgsign true
+fi

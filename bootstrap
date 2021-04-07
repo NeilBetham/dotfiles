@@ -1,8 +1,25 @@
 #!/usr/bin/env bash
 set -euf -o pipefail
 
+# Check which platform we are on
+echo -n "Detected OS: "
+if [ "$(uname)" == "Darwin" ]; then
+  echo "MacOS"
+  export MACOS=1
+elif [ "$(uname)" == "Linux"]; then
+  echo "Linux"
+  export LINUX=1
+fi
+
+# Check if the shell is interactive
+if [ -t 0 ]; then
+  echo "Running with Shell"
+  export INTERACTIVE=1
+fi
+
+# Find the current directory location of the dotfiles repo so that we can link to it later
 CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-MODULE_REGEX="^[\./]+$|.git"
+MODULE_REGEX="^[\./]+$|\.git"
 
 function sym_link {
   ln -sf $1 $2
@@ -33,8 +50,12 @@ function bootstrap_module {
   BOOTSTRAPS=$(find $1 -regex '.*\.run$' | sort -V)
   for BOOTSTRAP in ${BOOTSTRAPS}
   do
-    echo "Running bootstrap $BOOTSTRAP"
-    $BOOTSTRAP
+    echo -n "Running bootstrap $BOOTSTRAP... "
+    if $BOOTSTRAP; then
+      echo "completed"
+    else
+      echo "failed"
+    fi
   done
 }
 
@@ -47,3 +68,5 @@ function bootstrap_modules {
 
 link_modules "$CWD"
 bootstrap_modules "$CWD"
+
+# Add flag for dealing with git signatures

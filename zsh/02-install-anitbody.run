@@ -11,4 +11,3 @@ if [ ! -d "${HOME}/bin" ]; then
 fi
 
 ${CWD}/install-antibody.sh -b "${HOME}/bin"
-

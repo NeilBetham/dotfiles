@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+if [ ! -d "${HOME}/.ssh" ]; then
+  mkdir "${HOME}/.ssh"
+fi
+
+if [ -f "${HOME}/.ssh/id_rsa_yubikey.pub" ]; then
+  exit 0
+fi
+
+# Pull the signing info from Yubikey
+if [[ -n $INTERACTIVE ]]; then
+  echo "Interactive... checking for yubikey"
+  while $(gpg --card-status 2>&1 | egrep -q 'No such device|Operation not supported by device'); do
+    echo "Waiting for YubiKey"
+    export KEY_PRESENT=1
+    sleep 1
+  done
+else
+  echo "Not running interactively, skipping yubikey check / install"
+fi
+
+if [[ -n $KEY_PRESENT ]]; then
+  ssh-add -L | grep "cardno:" > "${HOME}/.ssh/id_rsa_yubikey.pub"
+  gpg --fetch-keys $(gpg --card-status | grep 'URL of public key' | awk '{split($0, a, " : "); print a[2]}')
+fi
+
+cat << EOF >> "${HOME}/.ssh/config"
+Host github.com
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/id_rsa_yubikey.pub
+Host gitlab.com
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/id_rsa_yubikey.pub
+
+EOF

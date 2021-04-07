@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ -n ${LINUX} ]]; then
+  if [ -e /usr/bin/xclip ]; then
+    exit 0
+  fi
+
+  echo "Installing xclip for copy to clipboard support"
+  sudo apt install -y xclip
+fi

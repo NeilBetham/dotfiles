@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -e /usr/bin/xclip ]; then
-  exit 0
-fi
-
-sudo apt install xclip

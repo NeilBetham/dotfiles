@@ -6,18 +6,27 @@ if [ ! -d "${HOME}/.gnupg" ]; then
 fi
 
 
-if [ ! -f "${HOME}/.gnupg" ]; then
-
+if [ ! -f "${HOME}/.gnupg/gpg-agent.conf" ]; then
+if [[ -n ${LINUX} ]]; then
 cat <<EOF > "${HOME}/.gnupg/gpg-agent.conf"
 enable-ssh-support
 default-cache-ttl 60
 max-cache-ttl 120
 EOF
+fi
 
+# MacOS needs a native pinetry program
+if [[ -n ${MACOS} ]]; then
+cat <<EOF > "${HOME}/.gnupg/gpg-agent.conf"
+enable-ssh-support
+default-cache-ttl 60
+max-cache-ttl 120
+pinentry-program /usr/local/bin/pinentry-mac
+EOF
+fi
 fi
 
 # Start gpgp agent
 export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
-gpg-connect-agent updatestartuptty /bye > /dev/null
-
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+gpgconf --launch gpg-agent

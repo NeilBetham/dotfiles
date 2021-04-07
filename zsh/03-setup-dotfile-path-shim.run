@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# Needed for MacOS as readlink is missing features
+realpath() {
+  OURPWD=$PWD
+  cd "$(dirname "$1")"
+  LINK=$(readlink "$(basename "$1")")
+  while [ "$LINK" ]; do
+    cd "$(dirname "$LINK")"
+    LINK=$(readlink "$(basename "$1")")
+  done
+  REALPATH="$PWD/$(basename "$1")"
+  cd "$OURPWD"
+  echo "$REALPATH"
+}
+
+if [[ -n ${MACOS} ]]; then
+  export READLINK="realpath"
+elif [[ -n ${LINUX} ]]; then
+  export READLINK="readlink -f"
+fi
+
+cat <<EOF > ~/.dotpath
+#!/usr/bin/env bash
+echo "$(${READLINK} ${DIR}/../)"
+EOF
+
+chmod +x ~/.dotpath
