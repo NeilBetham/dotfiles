@@ -6,7 +6,7 @@ echo -n "Detected OS: "
 if [ "$(uname)" == "Darwin" ]; then
   echo "MacOS"
   export MACOS=1
-elif [ "$(uname)" == "Linux"]; then
+elif [ "$(uname)" == "Linux" ]; then
   echo "Linux"
   export LINUX=1
 fi
