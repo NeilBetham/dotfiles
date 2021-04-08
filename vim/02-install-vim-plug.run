@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euf -o pipefail
 CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ -f "${HOME}/.vim/autoload/plug.vim" ]
