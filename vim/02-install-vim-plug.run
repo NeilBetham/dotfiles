@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
-set -euf -o pipefail 
+set -euf -o pipefail
 CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ -f "${HOME}/.vim/autoload/plug.vim" ]
 then
   exit 0
 fi
+
+if [[ -n $MACOS ]]; then
+  brew install cmake
+elif [[ -n $LINUX ]]; then
+  sudo apt install -y build-essential cmake python3-dev
+end
 
 echo "Installing vim-plug"
 

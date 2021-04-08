@@ -40,7 +40,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 
-Plug 'valloric/youcompleteme', {'do': 'python3 ./install.py --clang-completer'}
+Plug 'ycm-core/YouCompleteMe', {'do': 'python3 ./install.py --clang-completer'}
 
 
 Plug 'easymotion/vim-easymotion'
