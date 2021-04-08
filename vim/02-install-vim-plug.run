@@ -11,7 +11,7 @@ if [[ -n $MACOS ]]; then
   brew install cmake
 elif [[ -n $LINUX ]]; then
   sudo apt install -y build-essential cmake python3-dev
-end
+fi
 
 echo "Installing vim-plug"
 
