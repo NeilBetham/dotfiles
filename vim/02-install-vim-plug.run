@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+. ${UTILS}/gh-release-utils.sh
 
 if [ -f "${HOME}/.vim/autoload/plug.vim" ]
 then
@@ -7,9 +8,12 @@ then
 fi
 
 if [[ -n $MACOS ]]; then
-  brew install cmake
+  brew install cmake fd
+
 elif [[ -n $LINUX ]]; then
   sudo apt install -y build-essential cmake python3-dev
+  download_release sharkdp/fd "fd-musl.*amd64.deb" "/tmp/fd.deb"
+  sudo dpkg -i /tmp/fd.deb
 fi
 
 echo "Installing vim-plug"

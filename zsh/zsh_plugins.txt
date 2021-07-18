@@ -1,8 +1,2 @@
-#robbyrussell/oh-my-zsh path:plugins/git
-#robbyrussell/oh-my-zsh path:plugins/systemd
-#robbyrussell/oh-my-zsh path:plugins/wd
-#robbyrussell/oh-my-zsh path:lib
-#robbyrussell/oh-my-zsh path:themes/robbyrussell.zsh-theme
-
 denysdovhan/spaceship-prompt
 NeilBetham/ls-colors-zsh

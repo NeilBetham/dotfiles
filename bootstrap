@@ -18,7 +18,8 @@ if [ -t 0 ]; then
 fi
 
 # Find the current directory location of the dotfiles repo so that we can link to it later
-CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+export CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+export UTILS="${CWD}/utils"
 MODULE_REGEX="^[\./]+$|\.git"
 
 function sym_link {

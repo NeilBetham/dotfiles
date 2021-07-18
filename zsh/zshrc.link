@@ -17,6 +17,36 @@ autoload -Uz compinit && compinit
 export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 
+# Prompt Setup
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  hg            # Mercurial section (hg_branch  + hg_status)
+  package       # Package version
+  ruby          # Ruby section
+  elixir        # Elixir section
+  xcode         # Xcode section
+  swift         # Swift section
+  golang        # Go section
+  rust          # Rust section
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  pyenv         # Pyenv section
+  ember         # Ember.js section
+  kubectl       # Kubectl context section
+  terraform     # Terraform workspace section
+  exec_time     # Execution time
+  line_sep      # Line break
+  battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
 # Antibody Setup
 ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 if [ "${DIR}/zsh_plugins.txt" -nt "~/.zsh_plugins.sh" ] || [ ! -f "~/.zsh_plugins.sh" ]; then
@@ -24,7 +54,7 @@ if [ "${DIR}/zsh_plugins.txt" -nt "~/.zsh_plugins.sh" ] || [ ! -f "~/.zsh_plugin
 fi
 source ~/.zsh_plugins.sh
 
-
+# Fuzzy finder setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # SSH Auth With Yubikey
@@ -37,3 +67,6 @@ test -f ~/.zshrc_mach && source ~/.zshrc_mach
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Use fd for fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
