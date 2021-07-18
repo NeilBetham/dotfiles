@@ -16,6 +16,9 @@ autoload -Uz compinit && compinit
 # Save history
 export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
+setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt SHARE_HISTORY
 
 # Prompt Setup
 SPACESHIP_PROMPT_ORDER=(
