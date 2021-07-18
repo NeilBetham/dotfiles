@@ -4,24 +4,24 @@
 # Use the vendored JQ for this script
 JQ="jq-vendor"
 
-curl_api() {
+function curl_api() {
   API_URL="$1"
   FULL_URL="https://api.github.com/${API_URL}"
   curl -s -H "Accept: application/vnd.github.v3+json" "${FULL_URL}"
 }
 
-jq_filt() {
+function jq_filt() {
   JSON_BLOB="$1"
   JQ_FILTER="$2"
   echo "${JSON_BLOB}" | $JQ -c "${JQ_FILTER}"
 }
 
-get_latest_release_assets() {
+function get_latest_release_assets() {
   USER_REPO_PATH="$1"
   curl_api "repos/${USER_REPO_PATH}/releases?per_page=1&page=1"
 }
 
-get_latest_release_file() {
+function get_latest_release_file() {
   USER_REPO_PATH="$1"
   FILE_NAME_MATCHER="$2"
   LATEST_RELEASE_ASSETS=$(get_latest_release_assets "${USER_REPO_PATH}")
@@ -34,7 +34,7 @@ get_latest_release_file() {
   done < <(jq_filt "${LATEST_RELEASE_ASSETS}" '.[0].assets[]')
 }
 
-download_release() {
+function download_release() {
   USER_REPO_PATH="$1"
   FILE_NAME_MATCHER="$2"
   OUTPUT_FILE=$3

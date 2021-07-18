@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+if [[ -n ${MACOS} ]]; then
+  exit 0
+fi
+
+. ${UTILS}/gh-release-utils.sh
+
+if ! command -v kitty &> /dev/null; then
+  echo "Installing kitty..."
+  download_release "kovidgoyal/kitty" "x86_64" "/tmp/kitty.txz"
+  tar -xf /tmp/kitty.txz -C "${HOME}/.local"
+fi

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+KITTY_CONFIG_DIR="${HOME}/.config/kitty"
+KITTY_CONFIG_FILE="${KITTY_CONFIG_DIR}/kitty.conf"
+
+if [ ! -e "${KITTY_CONFIG_DIR}" ]; then
+  mkdir -p "${KITTY_CONFIG_DIR}"
+fi
+
+if [ ! -e "${KITTY_CONFIG_FILE}" ]; then
+  ln -s "${CWD}/kitty/kitty.conf" "${KITTY_CONFIG_DIR}"
+fi
