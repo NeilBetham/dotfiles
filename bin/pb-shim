@@ -1,13 +1,20 @@
 #/usr/bin/env bash
 
+cleanup() {
+  if [ -e pb_pipe ]; then
+    rm pb_pipe
+  fi
+}
+trap cleanup EXIT
+
 mkfifo pb_pipe
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
   pbcopy < pb_pipe &
   cat >pb_pipe
   wait
   rm -rf pb_pipe
-elif [ "$(uanme)" == "Linux" ]; then
+elif [ "$(uname)" = "Linux" ]; then
   xclip -in -selection clipboard < pb_pipe &
   cat >pb_pipe
   wait
