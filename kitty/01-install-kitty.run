@@ -4,9 +4,32 @@ if [[ -n ${MACOS} ]]; then
 fi
 
 . ${UTILS}/gh-release-utils.sh
+. ${UTILS}/semver.sh
+
+function update_ready() {
+  CUR_VER="$(kitty --version | awk '{print $2}')"
+  NEW_VER="$(kitty +runpy 'from kitty.update_check import get_released_version; print(get_released_version())')"
+
+  if semver_gt "${NEW_VER}" "${CUR_VER}"; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+function install_kitty() {
+  TEMP_FILE="$(tempfile)"
+  download_release "kovidgoyal/kitty" "x86_64" "${TEMP_FILE}"
+  tar -xf "${TEMP_FILE}" -C "${HOME}/.local"
+}
 
 if ! command -v kitty &> /dev/null; then
   echo "Installing kitty..."
-  download_release "kovidgoyal/kitty" "x86_64" "/tmp/kitty.txz"
-  tar -xf /tmp/kitty.txz -C "${HOME}/.local"
+  install_kitty
 fi
+
+if update_ready; then
+  echo "Updating kitty..."
+  install_kitty
+fi
+
