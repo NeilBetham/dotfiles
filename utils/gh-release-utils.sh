@@ -38,13 +38,13 @@ function wget_wrap() {
 
   if [ -z "${HEADERS}" ]; then
     if [ -z "${OUTPUT_FILE}" ]; then
-      wget -q "${URI}"
+      wget -q "${URI}" -O -
     else
       wget -q -O "${OUTPUT_FILE}" "${URI}"
     fi
   else
     if [ -z "${OUTPUT_FILE}" ]; then
-      wget -q --header "${HEADERS}" "${URI}"
+      wget -q --header "${HEADERS}" "${URI}" -O -
     else
       wget -q --header "${HEADERS}" -O "${OUTPUT_FILE}" "${URI}"
     fi
@@ -94,7 +94,7 @@ function get_latest_release_file() {
   USER_REPO_PATH="$1"
   FILE_NAME_MATCHER="$2"
   LATEST_RELEASE_ASSETS=$(get_latest_release_assets "${USER_REPO_PATH}")
-  ASSERT_URLS=($(filter_json_for_assets ${LATEST_RELEASE_ASSETS}))
+  ASSERT_URLS=($(filter_json_for_assets "${LATEST_RELEASE_ASSETS}"))
   for ASSET_URL in "${ASSERT_URLS[@]}"; do
     if [[ ${ASSET_URL} =~ ${FILE_NAME_MATCHER} ]]; then
       echo "${ASSET_URL}"

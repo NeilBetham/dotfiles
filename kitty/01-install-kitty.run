@@ -26,6 +26,7 @@ function install_kitty() {
 if ! command -v kitty &> /dev/null; then
   echo "Installing kitty..."
   install_kitty
+  exit 0
 fi
 
 if update_ready; then
