@@ -12,9 +12,9 @@ if [[ -n $INTERACTIVE ]]; then
   echo "Interactive... checking for yubikey"
   while $(gpg --card-status 2>&1 | egrep -q 'No such device|Operation not supported by device'); do
     echo "Waiting for YubiKey"
-    export KEY_PRESENT=1
     sleep 1
   done
+  export KEY_PRESENT=1
 else
   echo "Not running interactively, skipping yubikey check / install"
 fi
