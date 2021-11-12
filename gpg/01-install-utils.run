@@ -8,7 +8,7 @@ if [[ -n ${LINUX} ]]; then
   echo "Missing scdaemon, installing now..."
   sudo apt install -y scdaemon
 elif [[ -n ${MACOS} ]]; then
-  if [ -f "/usr/local/bin/gpg" ]; then
+  if command -v "gpg" &> /dev/null; then
     exit 0
   fi
 

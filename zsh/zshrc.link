@@ -8,7 +8,7 @@ PATH="${HOME}/bin:${PATH}"
 PATH="${DIR}/bin/:${PATH}"
 
 # Make sure usr local bin is first
-PATH="/usr/local/bin:${PATH}"
+PATH="${HOME}/.brew/bin:${PATH}"
 
 # MacOS needs to set compinit to autoload
 autoload -Uz compinit && compinit

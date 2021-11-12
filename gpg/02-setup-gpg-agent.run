@@ -21,7 +21,7 @@ cat <<EOF > "${HOME}/.gnupg/gpg-agent.conf"
 enable-ssh-support
 default-cache-ttl 60
 max-cache-ttl 120
-pinentry-program /usr/local/bin/pinentry-mac
+pinentry-program $(which pinentry-mac)
 EOF
 fi
 fi

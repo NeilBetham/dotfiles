@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
+HOMEBREW_ROOT="${HOME}/.brew"
+
 if [[ -n ${MACOS} ]]; then
-  if [ ! -f "/usr/local/bin/brew" ]; then
-    echo "Installing Homebrew"
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if [ ! -e "${HOMEBREW_ROOT}" ]; then
+    echo "Installing Homebrew to '${HOMEBREW_ROOT}'"
+    git clone https://github.com/Homebrew/brew "${HOMEBREW_ROOT}"
+    eval "$(${HOMEBREW_ROOT}/bin/brew shellenv)"
+    brew update --force --quiet
+    chmod -R go-w "$(brew --prefix)/share/zsh"
   fi
 fi
