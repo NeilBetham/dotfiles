@@ -70,7 +70,8 @@ gpgconf --launch gpg-agent
 test -f ~/.zshrc_mach && source ~/.zshrc_mach
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$HOME/.rvm/bin:$PATH"
+source /home/neilbetham/.rvm/scripts/rvm
 
 # Use fd for fzf
 export FZF_DEFAULT_COMMAND='fd --type f'
